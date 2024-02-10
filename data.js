@@ -1,0 +1,14 @@
+// data.js
+const productos = [
+    { id: 1, nombre: 'Funda 11 pro', precio: 3000, imagen: 'img/11-pro.jpg' },
+    { id: 2, nombre: 'Funda 12 pro max', precio: 3500, imagen: 'img/12-pro-max.jpeg' },
+    { id: 3, nombre: 'Funda 13 pro', precio: 3800, imagen: 'img/13-pro.jpeg' },
+    { id: 4, nombre: 'Funda 14 pro', precio: 4000, imagen: 'img/14-pro.png' },
+    { id: 5, nombre: 'Funda 15 pro max', precio: 4800, imagen: 'img/15-pro-max.avif' },
+    { id: 6, nombre: 'Airpods 2da Generación', precio: 20000, imagen: 'img/airp-2da-gen.jpg' },
+    { id: 7, nombre: 'Airpods 3ra Generación', precio: 30000, imagen: 'img/airp-3ra-gen.jpg' },
+    { id: 8, nombre: 'Cargador Original 5w', precio: 15000, imagen: 'img/cargador-original-iphone-5w-5v.jpg' },
+    { id: 9, nombre: 'Cargador Original 20w', precio: 20000, imagen: 'img/cargador-original-iphone-20.jpg' },
+];
+
+const carrito = [];

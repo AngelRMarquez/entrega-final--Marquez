@@ -1,0 +1,106 @@
+/* Reset CSS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos para el contenedor principal */
+  .container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  /* Estilos para cada producto */
+  .product-container {
+    width: 250px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Estilos para la imagen del producto */
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para el nombre del producto */
+  .product-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Estilos para el precio del producto */
+  .product-price {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 5px;
+  }
+  
+  /* Estilos para el botón de agregar al carrito */
+  .btn-add-to-cart {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  /* Estilos para el botón de agregar al carrito al pasar el ratón */
+  .btn-add-to-cart:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para el contenedor de detalles de pago y productos en el carrito */
+  .datos-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  /* Estilos para los encabezados en el contenedor de detalles de pago y productos en el carrito */
+  .datos-container h3,
+  .datos-container h4 {
+    margin-top: 0;
+  }
+  
+  /* Estilos para los párrafos en el contenedor de detalles de pago y productos en el carrito */
+  .datos-container p {
+    margin-bottom: 5px;
+  }
+  
+  /* Estilos para la lista de productos en el carrito */
+  .datos-container ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  /* Estilos para los elementos de la lista de productos en el carrito */
+  .datos-container ul li {
+    margin-bottom: 5px;
+  }
+  
+  /* Estilos para los botones */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Estilos para los botones al pasar el ratón */
+  button:hover {
+    background-color: #0056b3;
+  }
+  

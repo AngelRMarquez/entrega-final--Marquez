@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IphoneTech</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                aria-expanded="false">
+                Categoría
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Fundas</a></li>
+                <li><a class="dropdown-item" href="#">Cargadores</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Audífonos</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0" role="search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Búsqueda</button>
+          </form>
+        </div>
+        <div id="userLogin" class="nav-item"></div>
+        <div id="btnCarrito" style="margin-right: 20px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-cart"
+            viewBox="0 0 16 16">
+            <path
+              d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z">
+            </path>
+          </svg>
+          <p id="contador_carrito"></p>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container" id="product-list">
+    <!-- Aquí se agregarán dinámicamente los productos -->
+  </div>
+  <div id="datos-almacenados">
+    <h3>Carrito de Compras</h3>
+    <ul id="cart-items"></ul>
+    <p id="total">Total a pagar: $0.00</p>
+  </div>
+
+  <form id="payment-form" style="display: none;">
+    <label for="nombre_pago">Nombre:</label>
+    <input type="text" id="nombre_pago" name="nombre_pago" required><br>
+
+    <label for="tarjeta_pago">Número de tarjeta:</label>
+    <input type="text" id="tarjeta_pago" name="tarjeta_pago" required><br>
+
+    <label for="vencimiento_pago">Fecha de vencimiento:</label>
+    <input type="text" id="vencimiento_pago" name="vencimiento_pago" required><br>
+
+    <label for="cvv_pago">CVV:</label>
+    <input type="text" id="cvv_pago" name="cvv_pago" required><br>
+  </form>
+  <button id="btnPagar">Pagar</button>
+
+  <h3>Detalles de Pago</h3>
+  <!-- Formulario de Detalles de Pago -->
+  <form id="payment-details-form" style="display: none;">
+    <label for="nombre_detalle">Nombre:</label>
+    <input type="text" id="nombre_detalle" name="nombre_detalle" required><br>
+
+    <label for="tarjeta_detalle">Tarjeta de Crédito:</label>
+    <input type="text" id="tarjeta_detalle" name="tarjeta_detalle" required><br>
+
+    <label for="vencimiento_detalle">Fecha de 
+      Vencimiento:</label>
+    <input type="text" id="vencimiento_detalle" name="vencimiento_detalle" required><br>
+
+    <label for="cvv_detalle">CVV:</label>
+    <input type="text" id="cvv_detalle" name="cvv_detalle" required><br>
+  </form>
+  <button id="btnConfirmarPago">Confirmar Pago</button>
+
+  <script src="app.js"></script>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+</body>
+
+</html>
