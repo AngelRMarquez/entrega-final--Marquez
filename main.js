@@ -1,16 +1,15 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     iniciarUI();
-});
-
-function iniciarUI() {
-    mostrarProductos();
 
     document.getElementById('btnPagar').addEventListener('click', mostrarFormularioPago);
     document.getElementById('btnConfirmarPago').addEventListener('click', confirmarPago);
+});
 
-    // Mostrar datos almacenados en localStorage al cargar la página
-    mostrarDatosGuardados();
+function iniciarUI() {
+    cargarCarritoDesdeLocalStorage();
+    mostrarProductos();
+    actualizarCarrito();
+    calcularTotal();
 }
 
 function mostrarProductos() {
@@ -30,6 +29,43 @@ function mostrarProductos() {
     });
 }
 
+function agregarAlCarrito(id) {
+    const selectedProduct = productos.find(producto => producto.id === id);
+    const existingItem = carrito.find(item => item.id === id);
+
+    if (existingItem) {
+        existingItem.cantidad++;
+    } else {
+        carrito.push({ ...selectedProduct, cantidad: 1 });
+    }
+
+    guardarCarritoEnLocalStorage();
+    actualizarCarrito();
+    calcularTotal();
+    mostrarNotificacion('success', `Producto agregado al carrito: ${selectedProduct.nombre}`);
+}
+
+function actualizarCarrito() {
+    const cartItems = document.getElementById('cart-items');
+    if (cartItems) {
+        cartItems.innerHTML = '';
+
+        carrito.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${item.nombre} - Cantidad: ${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}`;
+            cartItems.appendChild(listItem);
+        });
+    }
+}
+
+function calcularTotal() {
+    const totalElement = document.getElementById('total');
+    if (totalElement) {
+        const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        totalElement.textContent = `Total a pagar: $${total.toFixed(2)}`;
+    }
+}
+
 function mostrarFormularioPago() {
     const paymentForm = document.getElementById('payment-form');
     if (paymentForm) {
@@ -38,13 +74,13 @@ function mostrarFormularioPago() {
 }
 
 function confirmarPago() {
-    const nombre = document.getElementById('nombre_pago').value;
+    const nombre = localStorage.getItem('User') || 'User';
     const tarjeta = document.getElementById('tarjeta_pago').value;
     const vencimiento = document.getElementById('vencimiento_pago').value;
     const cvv = document.getElementById('cvv_pago').value;
 
-    if (!nombre || !tarjeta || !vencimiento || !cvv) {
-        console.error('Por favor, complete todos los campos antes de confirmar el pago.');
+    if (!tarjeta || !vencimiento || !cvv) {
+        mostrarNotificacion('error', 'Por favor, complete todos los campos antes de confirmar el pago.');
         return;
     }
 
@@ -58,12 +94,17 @@ function confirmarPago() {
 
     localStorage.setItem('datosPago', JSON.stringify(datosPago));
     reiniciarCompra();
+    mostrarCarrito();
+    
+    mostrarNotificacion('success', 'Pago realizado');
 }
 
 function reiniciarCompra() {
     carrito.length = 0;
+    guardarCarritoEnLocalStorage();
     actualizarCarrito();
-    mostrarTotal(); // Mostrar el total después de reiniciar la compra
+    calcularTotal();
+
     const paymentForm = document.getElementById('payment-form');
     if (paymentForm) {
         paymentForm.style.display = 'none';
@@ -72,35 +113,57 @@ function reiniciarCompra() {
     mostrarDatosGuardados();
 }
 
+function cargarCarritoDesdeLocalStorage() {
+    const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito.length = 0;
+    carrito.push(...carritoGuardado);
+}
+
+function guardarCarritoEnLocalStorage() {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
 function mostrarDatosGuardados() {
     const datosGuardados = localStorage.getItem('datosPago');
-    const datosAlmacenadosElement = document.getElementById('datos-almacenados');
-
-    if (datosGuardados && datosAlmacenadosElement) {
-        const datos = JSON.parse(datosGuardados);
-
-        let html = '<h3>Detalles del pago:</h3>';
-        html += `<p id="nombre_pago">Nombre: ${datos.nombre}</p>`;
-        html += `<p id="tarjeta_pago">Tarjeta: ${datos.tarjeta}</p>`;
-        html += `<p id="vencimiento_pago">Vencimiento: ${datos.vencimiento}</p>`;
-        html += `<p id="cvv_pago">CVV: ${datos.cvv}</p>`;
-        html += '<h4>Productos en el carrito:</h4>';
-        html += '<ul>';
-        datos.carrito.forEach(item => {
-            html += `<li>${item.nombre} - Cantidad: ${item.cantidad} - Precio: $${(item.precio * item.cantidad).toFixed(2)}</li>`;
-        });
-        html += '</ul>';
-        html += `<p id="total">Total a pagar: $${calcularTotalCarrito().toFixed(2)}</p>`;
-
-        datosAlmacenadosElement.innerHTML = html;
+    if (datosGuardados) {
+        console.log('Datos almacenados en localStorage:', JSON.parse(datosGuardados));
     }
 }
 
-// Función para calcular el total del carrito
-function calcularTotalCarrito() {
-    let total = 0;
-    carrito.forEach(item => {
-        total += item.precio * item.cantidad;
+function mostrarNotificacion(tipo, mensaje) {
+    if (tipo === 'success') {
+        Toastify({
+            text: mensaje,
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)"
+            },
+            duration: 3000
+        }).showToast();
+    } else if (tipo === 'error') {
+        Toastify({
+            text: mensaje,
+            style: {
+                background: "linear-gradient(to right, #ff416c, #ff4b2b)"
+            },
+            duration: 3000
+        }).showToast();
+    }
+}
+
+function mostrarCarrito() {
+    const detallesCarrito = carrito.map(item => {
+        const subtotal = (item.precio * item.cantidad).toFixed(2);
+        return `${item.nombre} - Cantidad: ${item.cantidad} - Precio Unitario: $${item.precio.toFixed(2)} - Subtotal: $${subtotal}`;
     });
-    return total;
+
+    const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0).toFixed(2);
+
+    const mensaje = `Detalles del carrito:\n${detallesCarrito.join('\n')}\n\nTotal a pagar: $${total}`;
+
+    Swal.fire({
+        title: 'Detalles del Carrito',
+        html: mensaje,
+        icon: 'info',
+        confirmButtonText: 'OK'
+    });
 }

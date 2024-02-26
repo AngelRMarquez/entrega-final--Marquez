@@ -1,41 +1,46 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     iniciarUI();
-    
+
     document.getElementById('btnPagar').addEventListener('click', mostrarFormularioPago);
     document.getElementById('btnConfirmarPago').addEventListener('click', confirmarPago);
 });
 
 function iniciarUI() {
+    cargarCarritoDesdeLocalStorage();  // Nueva función para cargar el carrito
     mostrarProductos();
     actualizarCarrito();
     calcularTotal();
 }
 
-function mostrarProductos() {
+async function mostrarProductos() {
     const productList = document.getElementById('product-list');
 
-    axios.get('https://api.ejemplo.com/productos')
-        .then(response => {
-            const productos = response.data;
+    try {
+        const response = await fetch('https://api.ejemplo.com/productos');
+        if (!response.ok) {
+            throw new Error('Error al cargar productos');
+        }
 
-            productos.forEach(producto => {
-                const productElement = document.createElement('div');
-                productElement.className = 'product-container';
-                productElement.innerHTML = `
-                    <h3 class="product-name">${producto.nombre}</h3>
-                    <img src="${producto.imagen}" alt="${producto.nombre}" class="product-image">
-                    <p class="product-price">Precio: $${producto.precio.toFixed(2)}</p>
-                    <button class="btn-add-to-cart" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
-                `;
+        const productos = await response.json();
 
-                productList.appendChild(productElement);
-            });
-        })
-        .catch(error => {
-            console.error('Error al cargar productos:', error);
+        productos.forEach(producto => {
+            const productElement = document.createElement('div');
+            productElement.className = 'product-container';
+            productElement.innerHTML = `
+                <h3 class="product-name">${producto.nombre}</h3>
+                <img src="${producto.imagen}" alt="${producto.nombre}" class="product-image">
+                <p class="product-price">Precio: $${producto.precio.toFixed(2)}</p>
+                <button class="btn-add-to-cart" onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
+            `;
+
+            productList.appendChild(productElement);
         });
+    } catch (error) {
+        console.error('Error al cargar productos:', error.message);
+    }
 }
+
 
 function agregarAlCarrito(id) {
     const selectedProduct = productos.find(producto => producto.id === id);
@@ -50,6 +55,19 @@ function agregarAlCarrito(id) {
     actualizarCarrito();
     calcularTotal();
     mostrarNotificacion('success', `Producto agregado al carrito: ${selectedProduct.nombre}`);
+
+    guardarCarritoEnLocalStorage();
+}
+
+
+function cargarCarritoDesdeLocalStorage() {
+    const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito.length = 0; // Limpiar el carrito actual
+    carrito.push(...carritoGuardado); // Cargar el carrito desde localStorage
+}
+
+function guardarCarritoEnLocalStorage() {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
 function actualizarCarrito() {
@@ -101,7 +119,7 @@ function confirmarPago() {
 
     localStorage.setItem('datosPago', JSON.stringify(datosPago));
     reiniciarCompra();
-    mostrarCarrito();  // Nueva función para mostrar detalles del carrito
+    mostrarCarrito();  
 
     mostrarNotificacion('success', 'Pago realizado');
 }
@@ -146,13 +164,13 @@ function mostrarNotificacion(tipo, mensaje) {
     }
 }
 
-function mostrarCarrito() {
-    const detallesCarrito = carrito.map(item => {
-        return `${item.nombre} - Cantidad: ${item.cantidad} - Precio: $${(item.precio * item.cantidad).toFixed(2)}`;
-    });
+// function mostrarCarrito() {
+//     const detallesCarrito = carrito.map(item => {
+//         return `${item.nombre} - Cantidad: ${item.cantidad} - Precio: $${(item.precio * item.cantidad).toFixed(2)}`;
+//     });
 
-    const mensaje = `Detalles del carrito:\n${detallesCarrito.join('\n')}`;
+//     const mensaje = `Detalles del carrito:\n${detallesCarrito.join('\n')}`;
     
-    // Mostrar en una ventana emergente
-    alert(mensaje);
-}
+//     // Mostrar en una ventana emergente
+//     alert(mensaje);
+// }
