@@ -17,7 +17,7 @@ async function mostrarProductos() {
     const productList = document.getElementById('product-list');
 
     try {
-        const response = await fetch('https://api.ejemplo.com/productos');
+        const response = await fetch('productos.json');
         if (!response.ok) {
             throw new Error('Error al cargar productos');
         }
@@ -63,7 +63,7 @@ function agregarAlCarrito(id) {
 function cargarCarritoDesdeLocalStorage() {
     const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
     carrito.length = 0; // Limpiar el carrito actual
-    carrito.push(...carritoGuardado); // Cargar el carrito desde localStorage
+    carrito.push(...carritoGuardado); 
 }
 
 function guardarCarritoEnLocalStorage() {
