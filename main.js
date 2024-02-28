@@ -151,18 +151,9 @@ function mostrarNotificacion(tipo, mensaje) {
 }
 
 function mostrarCarrito() {
-    const detallesCarrito = carrito.map(item => {
-        const subtotal = (item.precio * item.cantidad).toFixed(2);
-        return `${item.nombre} - Cantidad: ${item.cantidad} - Precio Unitario: $${item.precio.toFixed(2)} - Subtotal: $${subtotal}`;
-    });
-
-    const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0).toFixed(2);
-
-    const mensaje = `Detalles del carrito:\n${detallesCarrito.join('\n')}\n\nTotal a pagar: $${total}`;
-
+  
     Swal.fire({
-        title: 'Detalles del Carrito',
-        html: mensaje,
+        title: 'Compra Realizada',
         icon: 'info',
         confirmButtonText: 'OK'
     });

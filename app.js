@@ -109,6 +109,9 @@ function confirmarPago() {
         return;
     }
 
+    // Muestra mensajes de alerta con el estado de las variables
+    alert(`Nombre: ${nombre}\nTarjeta: ${tarjeta}\nVencimiento: ${vencimiento}\nCVV: ${cvv}`);
+
     const datosPago = {
         nombre,
         tarjeta,
@@ -123,6 +126,7 @@ function confirmarPago() {
 
     mostrarNotificacion('success', 'Pago realizado');
 }
+
 
 function reiniciarCompra() {
     carrito.length = 0;
@@ -164,13 +168,3 @@ function mostrarNotificacion(tipo, mensaje) {
     }
 }
 
-// function mostrarCarrito() {
-//     const detallesCarrito = carrito.map(item => {
-//         return `${item.nombre} - Cantidad: ${item.cantidad} - Precio: $${(item.precio * item.cantidad).toFixed(2)}`;
-//     });
-
-//     const mensaje = `Detalles del carrito:\n${detallesCarrito.join('\n')}`;
-    
-//     // Mostrar en una ventana emergente
-//     alert(mensaje);
-// }

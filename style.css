@@ -9,6 +9,57 @@ body {
 }
 
 
+.titulo-principal {
+  color: #333; /* Color del texto, puedes cambiarlo según tu diseño */
+  font-size: 4em; /* Tamaño de la fuente, ajusta según tu preferencia */
+  text-align: center; /* Alineación del texto al centro */
+  margin: 20px 0; /* Márgenes superior e inferior para dar espacio */
+  font-weight: bold; /* Peso de la fuente, puedes ajustar según tu preferencia */
+}
+
+
+
+
+/* Estilo para la barra de navegación */
+.navbar {
+  background-color: #3498db; /* Color de fondo de la barra de navegación, puedes cambiarlo según tu diseño */
+  padding: 10px 0; /* Relleno interno de la barra de navegación */
+}
+
+/* Estilo para el enlace de la marca */
+.navbar-brand {
+  color: #fff; /* Color del texto, puedes cambiarlo según tu diseño */
+  font-size: 1.8em; /* Tamaño de la fuente para la marca */
+  font-weight: bold; /* Peso de la fuente para la marca */
+}
+
+/* Estilo para los enlaces de la barra de navegación */
+.navbar-nav .nav-link {
+  color: #fff; /* Color del texto de los enlaces, puedes cambiarlo según tu diseño */
+  margin-right: 15px; /* Espaciado derecho entre los enlaces */
+}
+
+/* Estilo para el botón de búsqueda */
+.form-inline input,
+.form-inline button {
+  border: none; /* Quitar bordes del input y botón */
+}
+
+/* Estilo para el ícono del carrito */
+#btnCarrito {
+  color: #fff; /* Color del texto del ícono, puedes cambiarlo según tu diseño */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el ícono */
+}
+
+/* Estilo para el contador del carrito */
+#contador_carrito {
+  background-color: #0c1c4b; /* Color de fondo del contador, puedes cambiarlo según tu diseño */
+  color: #fff; /* Color del texto del contador */
+  padding: 5px 10px; /* Relleno interno del contador */
+  border-radius: 50%; /* Borde redondeado del contador para dar un aspecto circular */
+  margin-left: 5px; /* Espaciado izquierdo entre el ícono y el contador */
+}
+
 /* Estilos para el contenedor principal */
 .container {
   margin-top: 20px; /* Aumenté el margen superior */
@@ -30,6 +81,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
   background-color: #e4d7d7; /* Fondo blanco para cada tarjeta */
 }
+
 
 /* Estilos para la imagen del producto */
 .product-image {
@@ -56,7 +108,7 @@ body {
 
 /* Estilos para el botón de agregar al carrito */
 .btn-add-to-cart {
-  background-color: #28a745; /* Color verde */
+  background-color: #e3e9e4; /* Color verde */
   color: #fff;
   border: none;
   padding: 8px 12px;
@@ -64,9 +116,14 @@ body {
   cursor: pointer;
 }
 
+.btn-out{
+
+  background-color: #131c9c;
+}
+
 /* Estilos para el botón de agregar al carrito al pasar el ratón */
 .btn-add-to-cart:hover {
-  background-color: #218838; /* Color verde más oscuro al pasar el ratón */
+  background-color: #bbc0bc; /* Color verde más oscuro al pasar el ratón */
 }
 
 /* Estilos para el contenedor de detalles de pago y productos en el carrito */
@@ -102,17 +159,19 @@ body {
 
 /* Estilos para los botones */
 button {
-  background-color: #48b960;
-  color: #fff;
+  background-color: #081720;
+  color: #b8c3d8;
   padding: 10px;
   border: none;
   cursor: pointer;
+  margin: 0 10px;
 }
 
 /* Estilos para los botones al pasar el ratón */
 button:hover {
-  background-color: #36a37f;
+  background-color: #6b78a1;
 }
+
 
 
 /* Estilos para el contenedor del formulario */
@@ -142,7 +201,7 @@ button:hover {
   padding: 8px;
   margin-bottom: 15px;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 1px solid #131c9c;
   border-radius: 4px;
 }
 
