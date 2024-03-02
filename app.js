@@ -17,7 +17,7 @@ async function mostrarProductos() {
     const productList = document.getElementById('product-list');
 
     try {
-        const response = await fetch('productos.json');
+        const response = await fetch('./producto.json');
         if (!response.ok) {
             throw new Error('Error al cargar productos');
         }
@@ -109,8 +109,6 @@ function confirmarPago() {
         return;
     }
 
-    // Muestra mensajes de alerta con el estado de las variables
-    alert(`Nombre: ${nombre}\nTarjeta: ${tarjeta}\nVencimiento: ${vencimiento}\nCVV: ${cvv}`);
 
     const datosPago = {
         nombre,
@@ -168,3 +166,11 @@ function mostrarNotificacion(tipo, mensaje) {
     }
 }
 
+function mostrarCarrito() {
+  
+    Swal.fire({
+        title: 'Compra Realizada',
+        icon: 'info',
+        confirmButtonText: 'OK'
+    });
+}
